@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Possible Log Levels:TRACE -DEBUG -INFO -WARN -ERROR -FATAL -->
+<Configuration status="INFO">
+	<Properties>
+		<Property name="logDir">C://hibernetlogs</Property>
+	</Properties>
+	<Appenders>
+		<Console name="consoleAppender" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<File name="fileAppender" fileName="${logDir}//hibernet_file.log">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+		</File>
+
+		<RollingFile name="rollingFileAppender"
+			fileName="${logDir}//hibernet.log"
+			filePattern="${logDir}/hibernate-%d{MM-dd-yyyy}.log.gz"
+			ignoreExceptions="false">
+
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+
+
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100MB" />
+
+			</Policies>
+
+			<!-- <DefaultRolloverStrategy max="3" /> -->
+
+
+		</RollingFile>
+
+
+
+
+
+	</Appenders>
+	<Loggers>
+		<Logger name="com.jit.User" level="trace" additivity="false">
+			<AppenderRef ref="consoleAppender" />
+			<AppenderRef ref="rollingFileAppender" />
+			<!-- <AppenderRef ref="fileAppender"/> -->
+		</Logger>
+		
+		<Logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+		<AppenderRef ref="consoleAppender" />
+		<AppenderRef ref="rollingFileAppender" />
+		
+		</Logger>
+		
+		<Logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
+		<AppenderRef ref="consoleAppender" />
+		<AppenderRef ref="rollingFileAppender" />
+		</Logger>
+
+		<Root level="INFO">
+			<AppenderRef ref="consoleAppender" />
+
+			<AppenderRef ref="rollingFileAppender" />
+		</Root>
+	</Loggers>
+
+
+
+</Configuration>

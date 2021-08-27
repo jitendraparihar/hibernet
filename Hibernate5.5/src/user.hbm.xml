@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.jit.User" table="User">
+
+		<meta attribute="class-description">
+			This class used to store user detail
+		</meta>
+
+		<id name="userId" type="int" column="userId">
+			<generator class="increment" />
+		</id>
+
+		<property name="firstName" column="firstName" type="string" />
+		<property name="middleName" column="middleName" type="string" />
+		<property name="lastName" column="lastName" type="string" />
+		<property name="address" column="address" type="string" />
+		
+		<property name="password" column="password" type="string" />
+		<property name="userType" column="userType" type="string" />
+		
+
+	</class>
+</hibernate-mapping>
